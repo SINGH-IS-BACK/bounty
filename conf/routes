@@ -1,0 +1,77 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           						controllers.BaseController.index()
+
+# Modo
+GET 	/modo/token											controllers.WalletController.generateToken()
+GET 	/modo/register										controllers.UserController.addMasterUser()
+GET		/modo/merchant/sync									controllers.MerchantController.syncModoMerchants()
+GET		/modo/merchant										controllers.MerchantController.getModoMerchants()
+# GET     /token                                              controllers.GiftController.addAccessToken()
+POST    /token                                              controllers.GiftController.getAccessToken()
+
+
+# Merchant 
+POST	/merchant											controllers.MerchantController.addNewMerchant()
+GET		/merchant											controllers.MerchantController.getAllMerchants()
+PUT     /merchant/:merchantId                               controllers.MerchantController.updateMerchant(merchantId: String)
+
+# Gift
+POST	/gift												controllers.GiftController.addGiftCard()
+GET		/gift  												controllers.GiftController.getAllGifts()
+GET    	/gift/:giftId/giftImage             				controllers.GiftController.getGiftImage(giftId: String)
+GET     /gift/:giftId                                       controllers.GiftController.getGift(giftId: String)
+PUT     /gift/:giftId                                       controllers.GiftController.updateGift(giftId: String)
+GET		/gift/:giftId/mail									controllers.GiftController.sendMailToMerchant(giftId: String)
+
+# Challenge
+POST	/challenge/:merchantId								controllers.ChallengeController.addChallenge(merchantId: String)
+GET		/challenge/:challengeId/finish/:userId				controllers.ChallengeController.finishChallenge(challengeId : String, userId : String)
+POST    /challenge/:challengeId/comment                     controllers.ChallengeController.addCommentOnChallenge(challengeId : String)
+POST    /challenge/:challengeId/like                        controllers.ChallengeController.likeChallenge(challengeId : String)
+DELETE  /challenge/:challengeId	     		                controllers.ChallengeController.deleteChallenge(challengeId : String)
+GET     /challenge/:challengeId/validate/:userId            controllers.ChallengeController.validateChallenge(challengeId : String, userId : String)
+GET     /challenge/:challengeId                             controllers.ChallengeController.getChallenge(challengeId : String)
+GET     /challenge                                          controllers.ChallengeController.getAllChallenges()
+
+POST    /smallCluster                                       controllers.ClusterController.getSmallCluster()
+POST    /largeCluster                                       controllers.ClusterController.getLargeCluster()
+
+# Activity
+GET		/activity/:userId/:start/:count						controllers.ActivityController.getFriendActivities(userId: String, start: Integer, count: Integer)
+POST    /activity/:activityId/comment                       controllers.ActivityController.addCommentOnActivity(activityId : String)
+POST    /activity/:activityId/like                          controllers.ActivityController.likeActivity(activityId : String)
+
+
+
+# Wallet
+GET		/wallet/visit/:userId/:giftId						controllers.WalletController.getCheckoutCode(userId: String, giftId: String)
+GET		/wallet/send/:senderId/:receiverId/:giftId			controllers.WalletController.sendGiftCardFromOneUserToOther(senderId: String, receiverId: String, giftId:String)
+GET		/wallet/:userId										controllers.WalletController.getMyGifts(userId: String)
+GET		/wallet/checkout/:userId/:giftId/:checkoutCode		controllers.WalletController.redeemGiftCard(userId: String, giftId: String, checkoutCode: String)
+
+# User
+POST	/user												controllers.UserController.registerUser()
+GET    	/user/:userId                    					controllers.UserController.getUser(userId: String)
+PUT     /user/:userId/email                                 controllers.UserController.updateEmailID(userId: String)
+GET    	/user/:userId/friends                 				controllers.UserController.getFriends(userId: String)
+PUT    	/user/:userId/updatefriends                 		controllers.UserController.updateFriends(userId: String)
+GET     /user/:userId/activity/:start/:count                controllers.ActivityController.getFriendActivities(userId: String, start: Integer, count: Integer)
+GET     /user/:userId/gift                                  controllers.GiftController.getUserGifts(userId: String)
+GET     /user/:userId/leaderboard                           controllers.UserController.getLeaderboard(userId: String)
+
+
+#invite
+GET     /inviteCodes/:numberOfInvites                       controllers.UserController.generateInviteCode(numberOfInvites: Integer)
+GET     /inviteCode                                         controllers.UserController.getInviteCode()
+POST    /inviteCode                                         controllers.UserController.useInviteCode()
+
+POST    /callBack                                           controllers.WalletController.callBack()
+GET     /callBack                                           controllers.WalletController.getCallBack()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

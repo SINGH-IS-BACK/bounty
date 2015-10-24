@@ -1,0 +1,7 @@
+New log file opened at Sat Oct 24 16:06:20 PDT 2015 by 72284@LM-BLR-00668778
+Taking next connection to: 49230
+New client attempting to connect on port: 49231-49230
+  Address = /127.0.0.1:49230
+This client on port 49231 has uuid 98cd41c6-117e-48b2-a808-28676bc39d12 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-98cd41c6-117e-48b2-a808-28676bc39d12
+Taking next connection to: 49230
